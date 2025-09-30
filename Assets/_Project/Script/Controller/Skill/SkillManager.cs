@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
+    // Biến **parents** sau này sẽ lấy từ data player 
     [SerializeField] private List<GameObject> parents;
     private SkillBarService skillService;
 
