@@ -63,7 +63,15 @@ public class GenericCsvImporter : AssetPostprocessor
                     var prop = elementType.GetField(headers[j], BindingFlags.Public | BindingFlags.Instance);
                     if (prop != null)
                     {
-                        object convertedValue = Convert.ChangeType(values[j], prop.FieldType);
+                        object convertedValue;
+                        if (prop.FieldType == typeof(GameObject))
+                        {
+                            convertedValue = FindPrefabByName(values[j]);
+                        }
+                        else
+                        {
+                            convertedValue = Convert.ChangeType(values[j], prop.FieldType);
+                        }
                         prop.SetValue(element, convertedValue);
                     }
                 }
@@ -111,5 +119,17 @@ public class GenericCsvImporter : AssetPostprocessor
                 parts[i] = char.ToUpper(parts[i][0]) + parts[i].Substring(1);
         }
         return string.Join("", parts);
+    }
+
+    static GameObject FindPrefabByName(string prefabName)
+    {
+        string[] guids = AssetDatabase.FindAssets(prefabName + " t:Prefab");
+        if (guids.Length > 0)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            return AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        }
+        Debug.LogWarning($"Prefab '{prefabName}' not found!");
+        return null;
     }
 }
