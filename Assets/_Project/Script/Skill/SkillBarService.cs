@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBarService
+public static class SkillBarService
 {
-    public void OnClickSetUsingObject(GameObject target, List<GameObject> parents)
+    public static void OnClickSetUsingObject(GameObject target, List<GameObject> parents)
     {
         Transform objUsing = target.transform.Find("using");
         Transform objActive = target.transform.Find("inactive");
@@ -21,7 +21,7 @@ public class SkillBarService
         objUsing.gameObject.SetActive(true);
     }
 
-    public void OnClickSetUnusingObject(List<GameObject> parents)
+    public static void OnClickSetUnusingObject(List<GameObject> parents)
     {
         Transform objUsing;
         foreach (var p in parents)

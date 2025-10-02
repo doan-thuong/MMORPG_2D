@@ -6,11 +6,9 @@ public class SkillManager : MonoBehaviour
 {
     // Biến **parents** sau này sẽ lấy từ data player 
     [SerializeField] private List<GameObject> parents;
-    private SkillBarService skillService;
 
     void Start()
     {
-        skillService = new();
 
         foreach (var obj in parents)
         {
@@ -27,6 +25,6 @@ public class SkillManager : MonoBehaviour
 
     private void OnAnyClickButton(GameObject target, List<GameObject> parents)
     {
-        skillService.OnClickSetUsingObject(target, parents);
+        SkillBarService.OnClickSetUsingObject(target, parents);
     }
 }
