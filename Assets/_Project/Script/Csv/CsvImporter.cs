@@ -6,6 +6,38 @@ using UnityEngine;
 
 public class GenericCsvImporter : AssetPostprocessor
 {
+    // Thêm dictionary ánh xạ kiểu dữ liệu sang hàm chuyển đổi
+    static readonly System.Collections.Generic.Dictionary<Type, Func<string, object>> typeParsers =
+        new()
+        {
+            { typeof(string), s => s },
+            { typeof(int), s => int.TryParse(s, out var v) ? v : 0 },
+            { typeof(float), s => float.TryParse(s, out var v) ? v : 0f },
+            // { typeof(bool), s => s == "1" || s.ToLower() == "true" },
+            { typeof(Vector2), s => {
+                var arr = s.Split('|');
+                return arr.Length == 2 && float.TryParse(arr[0], out var x) && float.TryParse(arr[1], out var y)
+                    ? new Vector2(x, y) : Vector2.zero;
+            }},
+            { typeof(Vector3), s => {
+                var arr = s.Split('|');
+                return arr.Length == 3 && float.TryParse(arr[0], out var x) && float.TryParse(arr[1], out var y) && float.TryParse(arr[2], out var z)
+                    ? new Vector3(x, y, z) : Vector3.zero;
+            }},
+            // Thêm kiểu khác nếu cần
+        };
+
+    static object ConvertValue(string value, Type targetType)
+    {
+        if (targetType == typeof(GameObject))
+            return FindPrefabByName(value);
+
+        if (typeParsers.TryGetValue(targetType, out var parser))
+            return parser(value);
+
+        return Convert.ChangeType(value, targetType);
+    }
+
     static void OnPostprocessAllAssets(
         string[] importedAssets,
         string[] deletedAssets,
@@ -63,15 +95,7 @@ public class GenericCsvImporter : AssetPostprocessor
                     var prop = elementType.GetField(headers[j], BindingFlags.Public | BindingFlags.Instance);
                     if (prop != null)
                     {
-                        object convertedValue;
-                        if (prop.FieldType == typeof(GameObject))
-                        {
-                            convertedValue = FindPrefabByName(values[j]);
-                        }
-                        else
-                        {
-                            convertedValue = Convert.ChangeType(values[j], prop.FieldType);
-                        }
+                        object convertedValue = ConvertValue(values[j], prop.FieldType);
                         prop.SetValue(element, convertedValue);
                     }
                 }
