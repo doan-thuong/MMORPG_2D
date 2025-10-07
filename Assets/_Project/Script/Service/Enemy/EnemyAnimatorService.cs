@@ -1,12 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class EnemyAnimatorService : MonoBehaviour
 {
     public Animator anim;
 
     void Awake()
     {
-        anim = GetComponent<Animator>();
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 
     public void SetAnimRun(bool isRun)

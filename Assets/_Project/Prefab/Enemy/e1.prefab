@@ -201,7 +201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
       propertyPath: m_Name
-      value: skeleton
+      value: e1
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
       propertyPath: m_Layer
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a14b76be0f8fa439691503f31ed491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 3
+  maxDistance: 2.5
   moveSpeed: 2
   waitTime: 2.5
 --- !u!114 &8262463264561120098
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5960b8da9f0fb8f4e944f55c2751b7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 651123380661887932}
 --- !u!114 &1734417656636834015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,3 +657,4 @@ MonoBehaviour:
   enemyConfig: {fileID: 11400000, guid: 054f570d075815c4085048cca385d550, type: 2}
   id: e1
   hp: 100
+  OriginalSpawnPoint: {x: 0, y: 0, z: 0}

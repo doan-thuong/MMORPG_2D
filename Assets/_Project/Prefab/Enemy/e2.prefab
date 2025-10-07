@@ -197,7 +197,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8653719598885068355, guid: 0f6639ad26652b94899a70bfa1ad30c5, type: 3}
       propertyPath: m_Name
-      value: skeleton rotten
+      value: e2
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 0f6639ad26652b94899a70bfa1ad30c5, type: 3}
       propertyPath: m_Layer
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a14b76be0f8fa439691503f31ed491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 3
+  maxDistance: 2.5
   moveSpeed: 2
   waitTime: 2.5
 --- !u!114 &3043473920148270576
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5960b8da9f0fb8f4e944f55c2751b7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 764203785023952205}
 --- !u!114 &1641832374205670258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,6 +652,7 @@ MonoBehaviour:
   enemyConfig: {fileID: 11400000, guid: 054f570d075815c4085048cca385d550, type: 2}
   id: e2
   hp: 100
+  OriginalSpawnPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &5867170931756016653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 0f6639ad26652b94899a70bfa1ad30c5, type: 3}
