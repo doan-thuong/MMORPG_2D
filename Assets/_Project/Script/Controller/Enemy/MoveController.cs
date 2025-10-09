@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
@@ -30,7 +31,12 @@ public class MoveController : MonoBehaviour
         // currentLocalScale = transform.localScale;
     }
 
-    void Start()
+    // void Start()
+    // {
+    //     StartCoroutine(Patrol());
+    // }
+
+    void OnEnable()
     {
         StartCoroutine(Patrol());
     }

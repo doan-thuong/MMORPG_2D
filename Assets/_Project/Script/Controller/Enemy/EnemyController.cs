@@ -1,3 +1,4 @@
+using System;
 using Ilumisoft.HealthSystem;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ public class EnemyController : MonoBehaviour
     private EnemyAnimatorService animatorService;
     [SerializeField] private EnemyConfig enemyConfig;
     private EnemyRecord enemyRecord;
+    public Action<EnemyController> OnDie;
     [SerializeField] private string id;
     public float hp = 0f;
+    public Vector3 OriginalSpawnPoint;
 
     void Awake()
     {
@@ -21,16 +24,22 @@ public class EnemyController : MonoBehaviour
         EnemyService.enemyConfig = enemyConfig;
     }
 
-    void Start()
+    void OnEnable()
     {
         enemyRecord = EnemyService.GetEnemy(id);
         hp = enemyRecord.hp;
-        hpBar.MaxHealth = hp;
-        hpBar.SetHealth(hp);
+        SetDataHpBar(hp);
     }
 
-    void Update()
+    public void SetDataHpBar(float hpValue)
     {
+        hpBar.MaxHealth = hpValue;
+        hpBar.SetHealth(hpValue);
+    }
+
+    public float GetMaxHp()
+    {
+        return enemyRecord.hp;
     }
 
     public void TakeDamage(float damage)
@@ -41,11 +50,17 @@ public class EnemyController : MonoBehaviour
 
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
+            Die();
         }
         else
         {
             animatorService.SetAnimGetHit();
         }
+    }
+
+    public void Die()
+    {
+        gameObject.SetActive(false);
+        OnDie?.Invoke(this);
     }
 }
