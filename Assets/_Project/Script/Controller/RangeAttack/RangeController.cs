@@ -15,15 +15,15 @@ public class RangeController : MonoBehaviour
         circle2D.radius = maxRange;
     }
 
-    // void Update()
-    // {
-    //     circle2D.radius += Time.deltaTime * speedScale;
+    void Update()
+    {
 
-    //     if (circle2D.radius >= maxRange)
-    //     {
-    //         circle2D.radius = 0.1f;
-    //     }
-    // }
+        if (circle2D.radius < maxRange)
+        {
+            circle2D.radius += Time.deltaTime * speedScale;
+            // circle2D.radius = 0.1f;
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -48,9 +48,31 @@ public class RangeController : MonoBehaviour
         }
     }
 
+    public bool CheckObjectInRange(GameObject orther)
+    {
+        return dictObject.ContainsValue(orther);
+    }
+
     public GameObject GetObjectNearest()
     {
         if (dictObject.Count == 0) return null;
-        return dictObject[new List<string>(dictObject.Keys)[0]];
+
+        GameObject currrentObjectNearest = null;
+        float currentDisNearest = int.MaxValue;
+
+        foreach (var enemy in dictObject.Values)
+        {
+            float dis = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (dis < currentDisNearest)
+            {
+                currrentObjectNearest = enemy;
+                currentDisNearest = dis;
+            }
+        }
+
+        if (currrentObjectNearest == null) Debug.Log("current obj nearest null");
+
+        return currrentObjectNearest;
     }
 }

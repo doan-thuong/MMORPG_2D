@@ -5,6 +5,7 @@ public class AttackController : MonoBehaviour
 {
     private RangeController rangeController;
     private HeroController heroController;
+    public GameObject currentTarget;
 
     void Start()
     {
@@ -16,10 +17,14 @@ public class AttackController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject target = rangeController.GetObjectNearest();
-            if (target != null)
+            if (currentTarget == null || !rangeController.CheckObjectInRange(currentTarget))
             {
-                EnemyController enemyCtrl = target.GetComponentInParent<EnemyController>();
+                currentTarget = rangeController.GetObjectNearest();
+            }
+
+            if (currentTarget != null && rangeController.CheckObjectInRange(currentTarget))
+            {
+                EnemyController enemyCtrl = currentTarget.GetComponentInParent<EnemyController>();
                 if (enemyCtrl == null)
                 {
                     Debug.LogError("Target null");
