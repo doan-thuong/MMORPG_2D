@@ -16,8 +16,10 @@ MonoBehaviour:
   - id: h1
     damage: 10
     hp: 50
+    mana: 40
     rangeAttack: 5
   - id: h2
     damage: 15
     hp: 30
+    mana: 30
     rangeAttack: 6

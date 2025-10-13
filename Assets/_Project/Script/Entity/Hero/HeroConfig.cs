@@ -8,6 +8,7 @@ public class HeroRecord
     public string id;
     public float damage;
     public float hp;
+    public float mana;
     public float rangeAttack;
 }
 

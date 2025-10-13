@@ -4682,7 +4682,7 @@ GameObject:
   - component: {fileID: 1438921860}
   - component: {fileID: 1438921859}
   - component: {fileID: 1438921858}
-  - component: {fileID: 1438921857}
+  - component: {fileID: 1438921861}
   m_Layer: 5
   m_Name: Mana
   m_TagString: Untagged
@@ -4710,19 +4710,6 @@ RectTransform:
   m_AnchoredPosition: {x: 209, y: 27}
   m_SizeDelta: {x: 350, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1438921857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438921855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e4559685617ae4a9144092e3bd50b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1438921858}
 --- !u!114 &1438921858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4812,6 +4799,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438921855}
   m_CullTransparentMesh: 1
+--- !u!114 &1438921861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438921855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f1fd04ae2fe0140a3322c337740e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1438921858}
 --- !u!1 &1441650181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4633366a71575b46ab56296fb63abc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
 --- !u!114 &1653637154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5346,9 +5347,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBarService: {fileID: 1441650183}
+  manaBarService: {fileID: 1438921861}
   id: h1
   heroConfig: {fileID: 11400000, guid: d8af0b975648cc14f81feba2fe6642cb, type: 2}
   hpBar: {fileID: 1441650184}
+  manaBar: {fileID: 1438921858}
   attackHero: 0
 --- !u!1 &1669184371
 GameObject:
