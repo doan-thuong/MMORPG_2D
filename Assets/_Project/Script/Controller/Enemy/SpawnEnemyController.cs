@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 public class SpawnEnemyController : MonoBehaviour
@@ -17,6 +16,16 @@ public class SpawnEnemyController : MonoBehaviour
         SpawnEnemy();
     }
 
+    void OnEnable()
+    {
+        EventManager.StartListeningEvent(EventName.Enemy.ENEMY_DIE, OnEnemyDied);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListeningEvent(EventName.Enemy.ENEMY_DIE, OnEnemyDied);
+    }
+
     void SpawnEnemy()
     {
         foreach (var item in spawnConfig.enemySpawns)
@@ -29,20 +38,24 @@ public class SpawnEnemyController : MonoBehaviour
             if (obInstance != null)
             {
                 var enemyCtrl = obInstance.GetComponent<EnemyController>();
-
                 enemyCtrl.OriginalSpawnPoint = pos;
-
-                //bỏ đăng ký trước khi đăng ký lại tránh trường hợp event bị đăng ký trùng lặp
-                enemyCtrl.OnDie -= RespawnEnemy;
-                enemyCtrl.OnDie += RespawnEnemy;
             }
         }
     }
 
-    async void RespawnEnemy(EnemyController enemy)
+    void OnEnemyDied(object data)
+    {
+        EnemyController enemy = data as EnemyController;
+        if (enemy != null)
+        {
+            StartCoroutine(RespawnAfterDelay(enemy));
+        }
+    }
+
+    IEnumerator RespawnAfterDelay(EnemyController enemy)
     {
         enemy.SetDataHpBar(enemy.GetMaxHp());
-        await Task.Delay(timeDelaySpawn * 1000);
+        yield return new WaitForSeconds(timeDelaySpawn);
 
         enemy.transform.position = enemy.OriginalSpawnPoint;
         enemy.gameObject.SetActive(true);

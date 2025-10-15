@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
         if (hp <= 0)
         {
             Die();
+            EventManager.EmitEvent(EventName.Enemy.ENEMY_DIE, this);
         }
         else
         {
