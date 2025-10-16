@@ -26,5 +26,7 @@ public class SkillManager : MonoBehaviour
     private void OnAnyClickButton(GameObject target, List<GameObject> parents)
     {
         SkillBarService.OnClickSetUsingObject(target, parents);
+        var nameSkill = target.name;
+        EventManager.EmitEvent(EventName.Skill.USE_SKILL, nameSkill);
     }
 }
