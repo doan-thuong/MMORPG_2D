@@ -5334,6 +5334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
+  skillConfig: {fileID: 11400000, guid: d4fea9c8b906b91438c25bf450e72e6d, type: 2}
 --- !u!114 &1653637154
 MonoBehaviour:
   m_ObjectHideFlags: 0

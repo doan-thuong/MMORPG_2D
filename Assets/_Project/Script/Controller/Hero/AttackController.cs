@@ -18,6 +18,7 @@ public class AttackController : MonoBehaviour
     {
         rangeController = GetComponentInChildren<RangeController>();
         heroController = GetComponent<HeroController>();
+        skillRecord = skillConfig.data[0];
     }
 
     void OnEnable()
