@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(HeroController))]
 public class AttackController : MonoBehaviour
 {
     private RangeController rangeController;
     private HeroController heroController;
+    [SerializeField] private GameObject btnAttack;
     public GameObject currentTarget;
     [SerializeField] private SkillConfig skillConfig;
     private SkillRecord skillRecord;
@@ -19,6 +21,9 @@ public class AttackController : MonoBehaviour
         rangeController = GetComponentInChildren<RangeController>();
         heroController = GetComponent<HeroController>();
         skillRecord = skillConfig.data[0];
+
+        var btn = btnAttack.GetComponent<Button>();
+        btn.onClick.AddListener(() => HandleAttack());
     }
 
     void OnEnable()
@@ -31,30 +36,27 @@ public class AttackController : MonoBehaviour
         EventManager.StopListeningEvent(EventName.Skill.USE_SKILL, HandleUseSkill);
     }
 
-    void Update()
+    void HandleAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (currentTarget == null || !rangeController.CheckObjectInRange(currentTarget))
         {
-            if (currentTarget == null || !rangeController.CheckObjectInRange(currentTarget))
-            {
-                currentTarget = rangeController.GetObjectNearest();
-            }
+            currentTarget = rangeController.GetObjectNearest();
+        }
 
-            if (currentTarget != null && rangeController.CheckObjectInRange(currentTarget))
+        if (currentTarget != null && rangeController.CheckObjectInRange(currentTarget))
+        {
+            EnemyController enemyCtrl = currentTarget.GetComponentInParent<EnemyController>();
+            if (enemyCtrl == null)
             {
-                EnemyController enemyCtrl = currentTarget.GetComponentInParent<EnemyController>();
-                if (enemyCtrl == null)
-                {
-                    Debug.LogError("Target null");
-                    return;
-                }
-                enemyCtrl.TakeDamage(skillRecord.damage);
-                Debug.Log($"damage: {skillRecord.damage}");
+                Debug.LogError("Target null");
+                return;
             }
-            else
-            {
-                Debug.Log("get target nearest null");
-            }
+            enemyCtrl.TakeDamage(skillRecord.damage);
+            Debug.Log($"damage: {skillRecord.damage}");
+        }
+        else
+        {
+            Debug.Log("get target nearest null");
         }
     }
 
