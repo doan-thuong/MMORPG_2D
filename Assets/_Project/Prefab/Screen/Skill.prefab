@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 5152784360690144877}
   - component: {fileID: 356688398381454825}
   - component: {fileID: 4834242015032434515}
+  - component: {fileID: 2318448755689881092}
   m_Layer: 5
   m_Name: Skill
   m_TagString: Untagged
@@ -273,6 +274,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2318448755689881092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7908115914241727755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3363a50ecbc2bf43b983573132ce0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usingObj: {fileID: 5655831084783963997}
+  activeObj: {fileID: 8100443131166693051}
 --- !u!1 &8100443131166693051
 GameObject:
   m_ObjectHideFlags: 0

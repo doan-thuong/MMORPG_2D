@@ -1,32 +1,78 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
     // Biến **parents** sau này sẽ lấy từ data player 
     [SerializeField] private List<GameObject> parents;
+    [SerializeField] private GameObject defaultSkill;
+    private Dictionary<GameObject, SkillControllerView> skillViews;
+
+    void Awake()
+    {
+        InitSkillView();
+    }
 
     void Start()
     {
+        if (defaultSkill != null)
+            SetActiveByName(defaultSkill);
+        else
+            Debug.LogError("Skill default null");
+    }
 
+    void InitSkillView()
+    {
+        skillViews = new();
         foreach (var obj in parents)
         {
-            Button btn = obj.GetComponent<Button>();
-
-            if (btn == null)
+            if (obj == null)
             {
-                Debug.LogError($"Not found button in {btn.name}");
+                Debug.LogError("Null object when init dict skillViews");
+                return;
             }
 
-            btn.onClick.AddListener(() => OnAnyClickButton(obj, parents));
+            var skillView = obj.GetComponent<SkillControllerView>();
+
+            if (skillView == null)
+            {
+                Debug.LogError("Get component SkillControllerView null");
+            }
+            skillViews.Add(obj, skillView);
         }
     }
 
-    private void OnAnyClickButton(GameObject target, List<GameObject> parents)
+    void SetActiveByName(GameObject gameObj)
     {
-        SkillBarService.OnClickSetUsingObject(target, parents);
-        var nameSkill = target.name;
+        if (skillViews.ContainsKey(gameObj))
+        {
+            if (skillViews[gameObj].ActiveSkill())
+            {
+                foreach (var item in skillViews)
+                {
+                    if (item.Key == gameObj) continue;
+                    else item.Value.DeactiveSkill();
+                }
+            }
+        }
+    }
+
+    void OnEnable()
+    {
+        EventManager.StartListeningEvent(EventName.Skill.CHOOSE_SKILL, HandleChooseSkill);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListeningEvent(EventName.Skill.CHOOSE_SKILL, HandleChooseSkill);
+    }
+
+    private void HandleChooseSkill(object gameObj)
+    {
+        var objParse = (GameObject)gameObj;
+        SetActiveByName(objParse);
+
+        var nameSkill = objParse.name;
         EventManager.EmitEvent(EventName.Skill.USE_SKILL, nameSkill);
     }
 }
