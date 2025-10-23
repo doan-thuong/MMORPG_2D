@@ -1909,6 +1909,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 470589418120639009, guid: ac627f42d362af840bbd87d10696eb40, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1653637154}
+    - targetCorrespondingSourceObject: {fileID: 470589418120639009, guid: ac627f42d362af840bbd87d10696eb40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1653637156}
   m_SourcePrefab: {fileID: 100100000, guid: ac627f42d362af840bbd87d10696eb40, type: 3}
 --- !u!1 &736440000
 GameObject:
@@ -2623,6 +2626,7 @@ MonoBehaviour:
   - {fileID: 1584831547}
   - {fileID: 321032618}
   - {fileID: 2133902169}
+  defaultSkill: {fileID: 1266502129}
 --- !u!1 &955849930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4633366a71575b46ab56296fb63abc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnAttack: {fileID: 125555377}
+  heroController: {fileID: 0}
   currentTarget: {fileID: 0}
   skillConfig: {fileID: 11400000, guid: d4fea9c8b906b91438c25bf450e72e6d, type: 2}
 --- !u!114 &1653637154
@@ -5353,7 +5359,21 @@ MonoBehaviour:
   heroConfig: {fileID: 11400000, guid: d8af0b975648cc14f81feba2fe6642cb, type: 2}
   hpBar: {fileID: 1441650184}
   manaBar: {fileID: 1438921858}
-  attackHero: 0
+--- !u!114 &1653637156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653637144}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f044940aefb83145ad42d6b67451f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpRegen: 10
+  ManaRegen: 3
+  timeDelay: 5
 --- !u!1 &1669184371
 GameObject:
   m_ObjectHideFlags: 0
