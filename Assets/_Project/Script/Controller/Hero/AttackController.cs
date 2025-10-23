@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(HeroController))]
 public class AttackController : MonoBehaviour
 {
     private RangeController rangeController;
-    private HeroController heroController;
     [SerializeField] private GameObject btnAttack;
+    [SerializeField] private HeroController heroController;
     public GameObject currentTarget;
     [SerializeField] private SkillConfig skillConfig;
-    private SkillRecord skillRecord;
+    private ISkill currentSkill;
 
     void Awake()
     {
@@ -18,9 +17,8 @@ public class AttackController : MonoBehaviour
 
     void Start()
     {
-        rangeController = GetComponentInChildren<RangeController>();
         heroController = GetComponent<HeroController>();
-        skillRecord = skillConfig.data[0];
+        rangeController = GetComponentInChildren<RangeController>();
 
         var btn = btnAttack.GetComponent<Button>();
         btn.onClick.AddListener(() => HandleAttack());
@@ -51,8 +49,17 @@ public class AttackController : MonoBehaviour
                 Debug.LogError("Target null");
                 return;
             }
-            enemyCtrl.TakeDamage(skillRecord.damage);
-            Debug.Log($"damage: {skillRecord.damage}");
+
+            if (currentSkill == null)
+            {
+                Debug.LogError("Skill is null");
+                return;
+            }
+
+            EventManager.EmitEvent(EventName.Enemy.ENEMY_NEAREST, currentTarget);
+
+            currentSkill.Cast(currentTarget);
+            heroController.UpdateMana(currentSkill.CostMana());
         }
         else
         {
@@ -63,6 +70,7 @@ public class AttackController : MonoBehaviour
     void HandleUseSkill(object data)
     {
         string idSkill = data.ToString();
-        skillRecord = SkillService.GetSkill(idSkill);
+        // Debug.Log($"current skill id : {idSkill}");
+        currentSkill = SkillService.CreateSkill(idSkill) ?? currentSkill;
     }
 }

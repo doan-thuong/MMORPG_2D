@@ -6,8 +6,12 @@ using UnityEngine;
 public class SkillRecord
 {
     public string id;
-    public float cooldown;
-    public float damage;
+    public float a;
+    public float b;
+    public float c;
+    public float d;
+    public float e;
+    public float f;
 }
 
 [CreateAssetMenu(fileName = "skill_config", menuName = "Custom/skill_config")]

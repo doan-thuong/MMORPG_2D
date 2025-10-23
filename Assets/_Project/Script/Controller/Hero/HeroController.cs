@@ -12,7 +12,8 @@ public class HeroController : MonoBehaviour
     public Slider manaBar;
     private float currentHp;
     private float currentMana;
-    public float attackHero;
+    private float maxHp;
+    private float maxMana;
 
     void Awake()
     {
@@ -32,7 +33,9 @@ public class HeroController : MonoBehaviour
             manaBarService.slider = manaBar;
         }
 
-        attackHero = heroRecord.damage;
+        maxHp = heroRecord.hp;
+        maxMana = heroRecord.mana;
+
         InitHPBar();
         InitManaBar();
     }
@@ -56,9 +59,15 @@ public class HeroController : MonoBehaviour
         currentHp = heroRecord.hp;
     }
 
-    void UpdateHP(float hpCost)
+    public void UpdateHP(float hpCost)
     {
         currentHp -= hpCost;
+
+        if (currentHp >= maxHp)
+        {
+            currentHp = maxHp;
+        }
+
         hpBarService.SetHealth(currentHp);
     }
 
@@ -68,9 +77,15 @@ public class HeroController : MonoBehaviour
         currentMana = heroRecord.mana;
     }
 
-    void UpdateMana(float manaCost)
+    public void UpdateMana(float manaCost)
     {
         currentMana -= manaCost;
+
+        if (currentMana >= maxMana)
+        {
+            currentMana = maxMana;
+        }
+
         manaBarService.SetMana(currentMana);
     }
 }

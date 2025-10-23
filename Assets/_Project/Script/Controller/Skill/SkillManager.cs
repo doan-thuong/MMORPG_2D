@@ -16,7 +16,10 @@ public class SkillManager : MonoBehaviour
     void Start()
     {
         if (defaultSkill != null)
+        {
             SetActiveByName(defaultSkill);
+            EventManager.EmitEvent(EventName.Skill.USE_SKILL, defaultSkill.name);
+        }
         else
             Debug.LogError("Skill default null");
     }
