@@ -6,6 +6,6 @@ public interface ISkill
     float Cooldown { get; }
     void Initialize(GameObject owner);
     bool CanCast();
-    void Cast(GameObject owner);
+    bool Cast(GameObject owner);
     float CostMana();
 }

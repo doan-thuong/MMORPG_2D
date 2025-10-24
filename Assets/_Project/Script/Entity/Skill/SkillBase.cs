@@ -15,12 +15,13 @@ public abstract class SkillBase : ScriptableObject, ISkill
         return IsReady;
     }
 
-    public void Cast(GameObject owner)
+    public bool Cast(GameObject owner)
     {
-        if (!CanCast()) return;
+        if (!CanCast()) return false;
 
         lastCastTime = Time.time;
         Execute();
+        return true;
     }
 
     public float CostMana()

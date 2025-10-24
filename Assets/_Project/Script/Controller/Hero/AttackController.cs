@@ -58,8 +58,8 @@ public class AttackController : MonoBehaviour
 
             EventManager.EmitEvent(EventName.Enemy.ENEMY_NEAREST, currentTarget);
 
-            currentSkill.Cast(currentTarget);
-            heroController.UpdateMana(currentSkill.CostMana());
+            if (currentSkill.Cast(currentTarget))
+                heroController.UpdateMana(currentSkill.CostMana());
         }
         else
         {
