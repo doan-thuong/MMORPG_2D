@@ -15,5 +15,6 @@ public static class EventName
     {
         public const string USE_SKILL = "USE_SKILL";
         public const string CHOOSE_SKILL = "CHOOSE_SKILL";
+        public const string START_COOLDOWN = "START_COOLDOWN";
     }
 }

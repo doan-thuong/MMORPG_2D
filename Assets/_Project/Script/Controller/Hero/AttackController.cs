@@ -59,7 +59,13 @@ public class AttackController : MonoBehaviour
             EventManager.EmitEvent(EventName.Enemy.ENEMY_NEAREST, currentTarget);
 
             if (currentSkill.Cast(currentTarget))
+            {
                 heroController.UpdateMana(currentSkill.CostMana());
+
+                var skilData = new SkillEventData(currentSkill.Id, currentSkill.Cooldown);
+                EventManager.EmitEvent(EventName.Skill.START_COOLDOWN, skilData);
+            }
+
         }
         else
         {
@@ -70,7 +76,18 @@ public class AttackController : MonoBehaviour
     void HandleUseSkill(object data)
     {
         string idSkill = data.ToString();
-        // Debug.Log($"current skill id : {idSkill}");
         currentSkill = SkillService.CreateSkill(idSkill) ?? currentSkill;
+    }
+}
+
+public struct SkillEventData
+{
+    public string skillId;
+    public float timeCooldown;
+
+    public SkillEventData(string skillId, float timeCooldown)
+    {
+        this.skillId = skillId;
+        this.timeCooldown = timeCooldown;
     }
 }
