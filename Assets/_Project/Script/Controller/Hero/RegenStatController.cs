@@ -19,7 +19,7 @@ public class RegenStatController : MonoBehaviour
         running = true;
         while (running)
         {
-            await UniTask.Delay((int)timeDelay);
+            await UniTask.Delay((int)timeDelay * 1000);
             // Debug.Log("regen stat");
             heroController.UpdateHP(-HpRegen);
             heroController.UpdateMana(-ManaRegen);
