@@ -23,7 +23,7 @@ MonoBehaviour:
   - id: Skill_2
     a: 1
     b: 20
-    c: 10
+    c: 4
     d: 0
     e: 0
     f: 0

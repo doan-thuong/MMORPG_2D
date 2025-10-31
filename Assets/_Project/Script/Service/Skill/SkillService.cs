@@ -1,5 +1,4 @@
 using UnityEngine;
-using SkillLogic;
 using System.Collections.Generic;
 using System;
 
@@ -27,7 +26,7 @@ public static class SkillService
         return skillConfig.data.Find(r => r.id == id);
     }
 
-    public static ISkill CreateSkill(string id)
+    public static ISkill CreateSkill(string id, GameObject owner)
     {
         SkillRecord record = GetSkill(id);
         if (record == null)
@@ -44,7 +43,7 @@ public static class SkillService
 
         var skill = ScriptableObject.CreateInstance(skillType) as ISkill;
         ((SkillBase)skill).SetData(record);
-        skill.Initialize(null);
+        skill.Initialize(owner);
         return skill;
     }
 }

@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
         hp = Mathf.Max(0, hp - damage);
 
         hpBar.ApplyDamage(damage);
+        Debug.Log("enemy take damage");
 
         if (hp <= 0)
         {

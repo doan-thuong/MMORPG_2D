@@ -58,7 +58,7 @@ public class AttackController : MonoBehaviour
 
             EventManager.EmitEvent(EventName.Enemy.ENEMY_NEAREST, currentTarget);
 
-            if (currentSkill.Cast(currentTarget))
+            if (currentSkill.Cast(gameObject, currentTarget))
             {
                 heroController.UpdateMana(currentSkill.CostMana());
 
@@ -75,8 +75,8 @@ public class AttackController : MonoBehaviour
 
     void HandleUseSkill(object data)
     {
-        string idSkill = data.ToString();
-        currentSkill = SkillService.CreateSkill(idSkill) ?? currentSkill;
+        string idSkill = data as string;
+        currentSkill = SkillService.CreateSkill(idSkill, gameObject) ?? currentSkill;
     }
 }
 

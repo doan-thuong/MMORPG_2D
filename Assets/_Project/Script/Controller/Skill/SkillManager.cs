@@ -72,7 +72,7 @@ public class SkillManager : MonoBehaviour
 
     private void HandleChooseSkill(object gameObj)
     {
-        var objParse = (GameObject)gameObj;
+        var objParse = gameObj as GameObject;
         SetActiveByName(objParse);
 
         var nameSkill = objParse.name;

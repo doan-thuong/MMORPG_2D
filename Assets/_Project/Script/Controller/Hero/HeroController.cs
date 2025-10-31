@@ -63,10 +63,7 @@ public class HeroController : MonoBehaviour
     {
         currentHp -= hpCost;
 
-        if (currentHp >= maxHp)
-        {
-            currentHp = maxHp;
-        }
+        currentHp = Mathf.Clamp(currentHp, 0, maxHp);
 
         hpBarService.SetHealth(currentHp);
     }
@@ -81,11 +78,13 @@ public class HeroController : MonoBehaviour
     {
         currentMana -= manaCost;
 
-        if (currentMana >= maxMana)
-        {
-            currentMana = maxMana;
-        }
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
 
         manaBarService.SetMana(currentMana);
+    }
+
+    public float GetCurrentMana()
+    {
+        return currentMana;
     }
 }

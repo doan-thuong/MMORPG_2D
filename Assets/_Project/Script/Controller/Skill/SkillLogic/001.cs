@@ -1,28 +1,47 @@
 using UnityEngine;
 
-namespace SkillLogic
+public class Skill001 : SkillBase
 {
-    public class Skill001 : SkillBase
+    private float damage => data.b;
+
+    private DamageEffect damageEffect = new();
+
+    public override void Initialize(GameObject owner)
     {
-        private GameObject target;
-        private float damage => data.b;
+        base.Initialize(owner);
+        AddEffect(damageEffect);
+        EventManager.StartListeningEvent(EventName.Enemy.ENEMY_NEAREST, HandleEnemyTarget);
+    }
 
-        public override void Initialize(GameObject owner)
+    void OnDestroy()
+    {
+        EventManager.StopListeningEvent(EventName.Enemy.ENEMY_NEAREST, HandleEnemyTarget);
+    }
+
+    void HandleEnemyTarget(object data)
+    {
+        target = data as GameObject;
+    }
+
+    public override void Execute()
+    {
+        effectParam[EnumBase.EffectParam.damage] = damage;
+        base.Execute();
+    }
+
+    protected override bool HasEnoughMana()
+    {
+        if (owner == null)
         {
-            EventManager.StartListeningEvent(EventName.Enemy.ENEMY_NEAREST, HandleEnemyTarget);
+            Debug.LogError("owner null");
+            return false;
         }
 
-        void HandleEnemyTarget(object data)
+        if (owner.TryGetComponent(out HeroController hero))
         {
-            target = (GameObject)data;
+            return hero.GetCurrentMana() > ManaCost;
         }
 
-        protected override void Execute()
-        {
-            if (target.TryGetComponent(out EnemyController enemy))
-            {
-                enemy.TakeDamage(damage);
-            }
-        }
+        return false;
     }
 }
