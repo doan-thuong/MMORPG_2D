@@ -51,6 +51,6 @@ public class Skill002 : SkillBase
     {
         var path = string.Format(PathResource.PATH_PREFAB_SKILL_ITEM, "Projectile");
 
-        return PoolService.Spawn(path, owner.transform.position, null, owner.transform);
+        return PoolService.Spawn(path, owner.transform.position, null, null);
     }
 }
