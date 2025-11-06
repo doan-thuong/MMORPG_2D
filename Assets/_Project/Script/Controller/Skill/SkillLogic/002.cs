@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill002 : SkillBase
@@ -6,6 +7,7 @@ public class Skill002 : SkillBase
     private float speed => data.c;
 
     private ProjectileEffect projectileEffect = new();
+    private List<GameObject> projectiles = new();
 
     public override void Initialize(GameObject owner)
     {
@@ -49,8 +51,18 @@ public class Skill002 : SkillBase
 
     private GameObject SpawnProjectile()
     {
+        foreach (var proj in projectiles)
+        {
+            if (!proj.activeInHierarchy)
+            {
+                GameObject projectile = PoolService.Despawn(proj, owner.transform.position);
+                return projectile;
+            }
+        }
         var path = string.Format(PathResource.PATH_PREFAB_SKILL_ITEM, "Projectile");
 
-        return PoolService.Spawn(path, owner.transform.position, null, null);
+        GameObject projectileNew = PoolService.Spawn(path, owner.transform.position);
+        projectiles.Add(projectileNew);
+        return projectileNew;
     }
 }

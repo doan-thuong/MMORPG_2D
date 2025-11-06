@@ -29,4 +29,12 @@ public static class PoolService
 
         return Object.Instantiate(prefab, pos, rot, parent);
     }
+
+    public static GameObject Despawn(GameObject gameObject, Vector3? position = null, Quaternion? rotation = null)
+    {
+        gameObject.transform.SetPositionAndRotation(position ?? Vector3.zero, rotation ?? Quaternion.identity);
+        gameObject.SetActive(true);
+
+        return gameObject;
+    }
 }

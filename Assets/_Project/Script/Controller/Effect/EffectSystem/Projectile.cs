@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
