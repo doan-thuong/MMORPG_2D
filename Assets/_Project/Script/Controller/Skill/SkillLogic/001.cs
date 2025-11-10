@@ -3,6 +3,7 @@ using UnityEngine;
 public class Skill001 : SkillBase
 {
     private float damage => data.b;
+    private float range => data.d;
 
     private DamageEffect damageEffect = new();
 
@@ -10,6 +11,7 @@ public class Skill001 : SkillBase
     {
         base.Initialize(owner);
         AddEffect(damageEffect);
+        SetRange(owner);
         EventManager.StartListeningEvent(EventName.Enemy.ENEMY_NEAREST, HandleEnemyTarget);
     }
 
@@ -43,5 +45,17 @@ public class Skill001 : SkillBase
         }
 
         return false;
+    }
+
+    private void SetRange(GameObject owner)
+    {
+        RangeController rangeCtrl = owner.GetComponentInChildren<RangeController>();
+        if (rangeCtrl == null)
+        {
+            Debug.LogError("Get component range controller null");
+            return;
+        }
+
+        rangeCtrl.maxRange = range;
     }
 }

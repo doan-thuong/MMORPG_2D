@@ -5,14 +5,15 @@ public class Skill002 : SkillBase
 {
     private float damage => data.b;
     private float speed => data.c;
+    private float range => data.d;
 
     private ProjectileEffect projectileEffect = new();
-    private List<GameObject> projectiles = new();
 
     public override void Initialize(GameObject owner)
     {
         base.Initialize(owner);
         AddEffect(projectileEffect);
+        SetRange(owner);
         EventManager.StartListeningEvent(EventName.Enemy.ENEMY_NEAREST, HandleEnemyTarget);
     }
 
@@ -51,18 +52,22 @@ public class Skill002 : SkillBase
 
     private GameObject SpawnProjectile()
     {
-        foreach (var proj in projectiles)
-        {
-            if (!proj.activeInHierarchy)
-            {
-                GameObject projectile = PoolService.Despawn(proj, owner.transform.position);
-                return projectile;
-            }
-        }
         var path = string.Format(PathResource.PATH_PREFAB_SKILL_ITEM, "Projectile");
 
-        GameObject projectileNew = PoolService.Spawn(path, owner.transform.position);
-        projectiles.Add(projectileNew);
+        GameObject projectileNew = PoolService.SpawnOther(path, owner.transform.position);
+        Debug.Log(owner.transform.position);
         return projectileNew;
+    }
+
+    private void SetRange(GameObject owner)
+    {
+        RangeController rangeCtrl = owner.GetComponentInChildren<RangeController>();
+        if (rangeCtrl == null)
+        {
+            Debug.LogError("Get component range controller null");
+            return;
+        }
+
+        rangeCtrl.maxRange = range;
     }
 }

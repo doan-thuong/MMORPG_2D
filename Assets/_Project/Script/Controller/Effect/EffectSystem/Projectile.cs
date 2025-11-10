@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
 
-            gameObject.SetActive(false);
+            PoolService.Despawn(gameObject);
         }
     }
 }
