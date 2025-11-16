@@ -21,6 +21,11 @@ public class Projectile : MonoBehaviour
         );
     }
 
+    void OnDisable()
+    {
+        target = null;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (damage <= 0) return;

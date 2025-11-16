@@ -53,9 +53,10 @@ public class Skill002 : SkillBase
     private GameObject SpawnProjectile()
     {
         var path = string.Format(PathResource.PATH_PREFAB_SKILL_ITEM, "Projectile");
+        string nameObject = "HandPlayer";
+        Transform handPlayer = owner.transform.Find(nameObject);
 
-        GameObject projectileNew = PoolService.SpawnOther(path, owner.transform.position);
-        Debug.Log(owner.transform.position);
+        GameObject projectileNew = PoolService.SpawnOther(path, handPlayer.position);
         return projectileNew;
     }
 
