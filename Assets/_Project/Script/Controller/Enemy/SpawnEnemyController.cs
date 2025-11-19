@@ -37,6 +37,7 @@ public class SpawnEnemyController : MonoBehaviour
 
             if (obInstance != null)
             {
+                obInstance.name = gObject.name;
                 var enemyCtrl = obInstance.GetComponent<EnemyController>();
                 enemyCtrl.OriginalSpawnPoint = pos;
             }

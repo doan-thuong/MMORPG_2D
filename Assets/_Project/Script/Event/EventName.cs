@@ -3,6 +3,7 @@ public static class EventName
     public static class Enemy
     {
         public const string ENEMY_DIE = "ENEMY_DIE";
+        public const string ENEMY_PROVOCATIVE = "ENEMY_PROVOCATIVE";
         public const string ENEMY_NEAREST = "ENEMY_NEAREST";
     }
 

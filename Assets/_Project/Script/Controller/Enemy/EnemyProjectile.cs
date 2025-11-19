@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     private GameObject target;
-    private GameObject owner;
     private float speed;
     private float damage;
 
     public void SetTarget(GameObject target) { this.target = target; }
-    public void SetOwner(GameObject owner) { this.owner = owner; }
     public void SetSpeed(float speed) { this.speed = speed; }
     public void SetDamage(float damage) { this.damage = damage; }
 
@@ -34,26 +32,12 @@ public class Projectile : MonoBehaviour
 
         if (other.gameObject == target)
         {
-            if (other.TryGetComponent(out EnemyController enemy))
+            if (other.TryGetComponent(out HeroController hero))
             {
-                enemy.TakeDamage(damage);
-                DataProvocative provocative = new(target, owner);
-                EventManager.EmitEvent(EventName.Enemy.ENEMY_PROVOCATIVE, provocative);
+                hero.UpdateHP(damage);
             }
 
             PoolService.Despawn(gameObject);
         }
-    }
-}
-
-public struct DataProvocative
-{
-    public GameObject owner;
-    public GameObject target;
-
-    public DataProvocative(GameObject owner, GameObject target)
-    {
-        this.owner = owner;
-        this.target = target;
     }
 }

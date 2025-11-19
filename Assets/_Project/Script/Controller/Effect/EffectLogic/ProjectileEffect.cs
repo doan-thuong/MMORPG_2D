@@ -14,6 +14,7 @@ public class ProjectileEffect : ISkillEffect
 
         if (projectileObject.TryGetComponent(out Projectile projectile))
         {
+            projectile.SetOwner(owner);
             projectile.SetTarget(target);
 
             if (param.TryGetValue(EnumBase.EffectParam.projectileSpeed, out float speed))

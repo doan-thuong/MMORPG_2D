@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1eea668e62ab264aa5aed007be026b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLayer: 0
+  targetLayer: 7
   circle2D: {fileID: 0}
   maxRange: 75
   speedScale: 180
@@ -494,6 +494,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9177315032241924543}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3082377681374090806}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
 --- !u!4 &7475612908876189532 stripped
 Transform:
@@ -658,3 +661,17 @@ MonoBehaviour:
   id: e1
   hp: 100
   OriginalSpawnPoint: {x: 0, y: 0, z: 0}
+--- !u!114 &3082377681374090806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608260708824028991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7e73ef86be40447b3950ef29ac679d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: {fileID: 523733446185641538}
+  enemyController: {fileID: 0}

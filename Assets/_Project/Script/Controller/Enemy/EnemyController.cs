@@ -60,6 +60,16 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public float DealDamage()
+    {
+        return enemyRecord.damage;
+    }
+
+    public EnemyRecord GetDataEnemy()
+    {
+        return enemyRecord;
+    }
+
     public void Die()
     {
         gameObject.SetActive(false);

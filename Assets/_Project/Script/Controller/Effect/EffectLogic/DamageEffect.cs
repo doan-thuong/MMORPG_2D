@@ -9,6 +9,8 @@ public class DamageEffect : ISkillEffect
         {
             if (target.TryGetComponent(out EnemyController enemy))
             {
+                DataProvocative provocative = new(target, owner);
+                EventManager.EmitEvent(EventName.Enemy.ENEMY_PROVOCATIVE, provocative);
                 enemy.TakeDamage(dmg);
             }
         }

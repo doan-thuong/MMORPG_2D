@@ -10,6 +10,8 @@ public class EnemyRecord
     public float damage;
     public float hp;
     public float rangeAttack;
+    public float attackCooldown;
+    public float projectileSpeed;
 }
 
 [CreateAssetMenu(fileName = "enemy_config", menuName = "Custom/enemy_config")]
