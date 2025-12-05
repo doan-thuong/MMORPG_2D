@@ -48,7 +48,7 @@ public class CameraFollow : MonoBehaviour
         {
             posX = transform.position.x;
         }
-        transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+        transform.position = new Vector3(posX, targetPos.y, transform.position.z);
     }
 
     private Dictionary<string, Vector2> FindPointLimit()
