@@ -6,7 +6,9 @@ public class NewMoveController : MonoBehaviour
     [SerializeField] private float flySpeed = 8f;
     [SerializeField] private float fallMultiplier = 5f;
     private float groundCheckRadius = 0.1f;
-    private float jumpForce = 6f;
+    [SerializeField] private float jumpForce = 6f;
+    private bool isJump = false;
+    [SerializeField] private float timeDelayJump = 1f;
     private Vector2 vecGravity;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheckPoint;
@@ -20,23 +22,35 @@ public class NewMoveController : MonoBehaviour
         vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float verticalInput = GetInput(joystick.Vertical, "Vertical");
         float horizontalInput = GetInput(joystick.Horizontal, "Horizontal");
 
-        Flip(horizontalInput);
-        Move(horizontalInput);
-
-        if (verticalInput > 0.5f && IsGround())
+        if (verticalInput > 0.5f && IsGround() && !isJump)
         {
             Jump();
+        }
+        else
+        {
+            Flip(horizontalInput);
+            Move(horizontalInput);
+        }
+
+        if (isJump)
+        {
+            timeDelayJump -= Time.deltaTime;
+            if (timeDelayJump <= 0)
+            {
+                isJump = false;
+                timeDelayJump = 1f;
+            }
         }
 
         if (rb2D.velocity.y < 0)
         {
             // để tăng trọng lực -> cho nhân vật rơi nhanh hơn
-            rb2D.velocity -= vecGravity * Time.deltaTime * fallMultiplier;
+            rb2D.velocity -= fallMultiplier * Time.deltaTime * vecGravity;
         }
     }
 
@@ -78,6 +92,7 @@ public class NewMoveController : MonoBehaviour
     {
         SetAnimJump();
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
+        isJump = true;
     }
 
     void Fly(float verticalInput, float horizontalInput)
