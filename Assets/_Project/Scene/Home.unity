@@ -439,7 +439,7 @@ Transform:
   m_GameObject: {fileID: 828859513}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0661907, y: -2.8760378, z: -9.924589}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -480,11 +480,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -3.8, y: -0.55}
-  - {x: 18, y: -0.55}
-  - {x: 18, y: 9}
-  - {x: -3.8, y: 9}
-  - {x: -3.8, y: -0.55}
+  - {x: -10.8, y: -3.5}
+  - {x: 11, y: -3.5}
+  - {x: 11, y: 4}
+  - {x: -10.8, y: 4}
+  - {x: -10.8, y: -3.4}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -1040,6 +1040,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 500655095}
+    - target: {fileID: 8260324378438031671, guid: f9f3b626bb8c0684787be326b0d99704, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
