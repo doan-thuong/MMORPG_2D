@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scene/Home.unity
     guid: f63d8aa28afed9d4fa7b4c3cb9c80b93
+  - enabled: 1
+    path: Assets/_Project/Scene/JungleScene.unity
+    guid: 59d7581e8f7cbe14086938520d38983b
   m_configObjects: {}
