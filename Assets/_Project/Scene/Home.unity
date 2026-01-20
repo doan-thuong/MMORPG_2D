@@ -893,6 +893,10 @@ PrefabInstance:
       propertyPath: sceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: 59d7581e8f7cbe14086938520d38983b, type: 3}
+    - target: {fileID: 1633888091862786962, guid: 4a28dfd2fd4c58c4382712243bf32755, type: 3}
+      propertyPath: targetScene
+      value: 
+      objectReference: {fileID: 11400000, guid: 6773d4fad31ef45469d4240f08c6c69f, type: 2}
     - target: {fileID: 4818240746492234991, guid: 4a28dfd2fd4c58c4382712243bf32755, type: 3}
       propertyPath: m_Name
       value: Gate

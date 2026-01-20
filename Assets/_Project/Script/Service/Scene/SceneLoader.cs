@@ -1,23 +1,22 @@
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
-public static class SceneName
+public static class SceneService
 {
-    public static class Scene
+    public static void LoadScene(SceneReference sceneRef)
     {
-        public static string SCENE_JUNGLE = "JungleScene";
-        public static string SCENE_HOME = "Home";
-    }
-}
+        if (sceneRef == null)
+        {
+            Debug.LogError("SceneReference is NULL");
+            return;
+        }
 
-public static class SceneLoader
-{
-    public static void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+        if (string.IsNullOrEmpty(sceneRef.SceneName))
+        {
+            Debug.LogError("Scene name is empty");
+            return;
+        }
 
-    public static void LoadSceneAsync(string sceneName)
-    {
-        SceneManager.LoadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneRef.SceneName);
     }
 }
