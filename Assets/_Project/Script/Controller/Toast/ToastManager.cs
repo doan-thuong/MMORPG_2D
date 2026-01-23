@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ToastManager : MonoBehaviour
 {
-    // [SerializeField] private TextMeshPro textMeshPro;
-    // [SerializeField] private GameObject toastObject;
+    [SerializeField] private Vector3 positionDefault = new(960, -675, 0);
+    [SerializeField] private float posY = 540f;
 
     void OnEnable()
     {
@@ -23,12 +23,12 @@ public class ToastManager : MonoBehaviour
         if (data is ToastStruct toastData)
         {
             string path = PathResource.PATH_PREFAB_TOAST_NOTI;
-            GameObject toastObject = PoolService.SpawnOther(path, new Vector3(960, -675, 0), null, gameObject.transform);
+            GameObject toastObject = PoolService.SpawnOther(path, positionDefault, null, gameObject.transform);
 
             var textMeshPro = toastObject.GetComponent<ToastView>();
             textMeshPro.SetTextMeshPro(toastData.mess);
 
-            toastObject.transform.DOMoveY(540, 1f);
+            toastObject.transform.DOMoveY(posY, 1f);
 
             StartCoroutine(AutoDespawn(toastObject, toastData.toastLifeTime));
         }
@@ -42,6 +42,6 @@ public class ToastManager : MonoBehaviour
     private IEnumerator AutoDespawn(GameObject toastGO, float toastLifeTime)
     {
         yield return new WaitForSeconds(toastLifeTime);
-        PoolService.Despawn(toastGO, new Vector3(960, -675, 0));
+        PoolService.Despawn(toastGO, positionDefault);
     }
 }

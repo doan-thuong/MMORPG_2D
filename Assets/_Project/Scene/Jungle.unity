@@ -1265,6 +1265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b7879d66bec19429ebb760aa19c043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionDefault: {x: 960, y: -675, z: 0}
+  posY: 540
 --- !u!1 &736440000
 GameObject:
   m_ObjectHideFlags: 0
