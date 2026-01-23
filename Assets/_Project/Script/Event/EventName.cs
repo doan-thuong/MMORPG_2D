@@ -18,4 +18,9 @@ public static class EventName
         public const string CHOOSE_SKILL = "CHOOSE_SKILL";
         public const string START_COOLDOWN = "START_COOLDOWN";
     }
+
+    public static class Toast
+    {
+        public const string PUSH_TOAST = "PUSH_TOAST";
+    }
 }

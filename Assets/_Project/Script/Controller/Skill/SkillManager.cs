@@ -57,6 +57,15 @@ public class SkillManager : MonoBehaviour
                     else item.Value.DeactiveSkill();
                 }
             }
+            else
+            {
+                ToastStruct toastStruct = new()
+                {
+                    mess = "The skill is currently locked",
+                    toastLifeTime = 3f
+                };
+                EventManager.EmitEvent(EventName.Toast.PUSH_TOAST, toastStruct);
+            }
         }
     }
 
