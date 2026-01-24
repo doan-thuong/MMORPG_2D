@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
@@ -7,7 +9,7 @@ using UnityEngine;
 public class GenericCsvImporter : AssetPostprocessor
 {
     // Thêm dictionary ánh xạ kiểu dữ liệu sang hàm chuyển đổi
-    static readonly System.Collections.Generic.Dictionary<Type, Func<string, object>> typeParsers =
+    static readonly Dictionary<Type, Func<string, object>> typeParsers =
         new()
         {
             { typeof(string), s => s },
@@ -35,7 +37,18 @@ public class GenericCsvImporter : AssetPostprocessor
         if (typeParsers.TryGetValue(targetType, out var parser))
             return parser(value);
 
-        return Convert.ChangeType(value, targetType);
+        if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(List<>))
+            return ParseList(value, targetType);
+
+        try
+        {
+            return Convert.ChangeType(value, targetType);
+        }
+        catch
+        {
+            Debug.LogError($"Cannot convert '{value}' to type {targetType}");
+            return null;
+        }
     }
 
     static void OnPostprocessAllAssets(
@@ -155,5 +168,31 @@ public class GenericCsvImporter : AssetPostprocessor
         }
         Debug.LogWarning($"Prefab '{prefabName}' not found!");
         return null;
+    }
+
+    static object ParseList(string value, Type listType)
+    {
+        // Lấy kiểu dữ liệu của phần tử bên trong List (ví dụ int trong List<int>)
+        Type elementType = listType.GetGenericArguments()[0];
+
+        // Tạo instance cho List: new List<T>()
+        IList list = (IList)Activator.CreateInstance(listType);
+
+        if (string.IsNullOrWhiteSpace(value))
+            return list;
+
+        // Tách chuỗi theo dấu phẩy
+        value = value.Replace("\"", string.Empty);
+        string[] items = value.Split(',');
+
+        foreach (var item in items)
+        {
+            // Gọi lại ConvertValue cho từng phần tử để tận dụng logic có sẵn (đệ quy)
+            // Điều này giúp List<Vector3> hay List<int> đều hoạt động
+            object parsedElement = ConvertValue(item.Trim(), elementType);
+            list.Add(parsedElement);
+        }
+
+        return list;
     }
 }
