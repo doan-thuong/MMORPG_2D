@@ -39,7 +39,7 @@ public static class PoolService
     {
         foreach (var item in pools)
         {
-            if (item.name == name && !item.activeInHierarchy)
+            if (item != null && item.name == name && !item.activeInHierarchy)
             {
                 pools.Remove(item);
                 return item;
