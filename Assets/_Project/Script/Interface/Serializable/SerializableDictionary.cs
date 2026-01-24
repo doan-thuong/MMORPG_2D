@@ -5,15 +5,15 @@ using UnityEngine;
 [Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
-    [SerializeField] private List<KeyValuePairWrapper> serializedPairs = new();
+    [SerializeField] private List<KeyValuePairWrapper> dictionary = new();
 
     // Khi Unity serialize (trước khi save)
     public void OnBeforeSerialize()
     {
-        serializedPairs.Clear();
+        dictionary.Clear();
         foreach (var kvp in this)
         {
-            serializedPairs.Add(new KeyValuePairWrapper { key = kvp.Key, value = kvp.Value });
+            dictionary.Add(new KeyValuePairWrapper { key = kvp.Key, value = kvp.Value });
         }
     }
 
@@ -21,7 +21,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     public void OnAfterDeserialize()
     {
         Clear();
-        foreach (var pair in serializedPairs)
+        foreach (var pair in dictionary)
         {
             if (pair.key != null && !ContainsKey(pair.key))
             {
