@@ -183,7 +183,7 @@ public class GenericCsvImporter : AssetPostprocessor
 
         // Tách chuỗi theo dấu phẩy
         value = value.Replace("\"", string.Empty);
-        string[] items = value.Split(',');
+        string[] items = value.Split(';');
 
         foreach (var item in items)
         {
