@@ -2,7 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class ToastManager : MonoBehaviour
+public class ToastManager : SingletonBehaviour<ToastManager>
 {
     [SerializeField] private Vector3 positionDefault = new(960, -675, 0);
     [SerializeField] private float posY = 540f;
@@ -19,7 +19,6 @@ public class ToastManager : MonoBehaviour
 
     private void HandlePushToastNoti(object data)
     {
-        Debug.Log("nghe");
         if (data is ToastStruct toastData)
         {
             string path = PathResource.PATH_PREFAB_TOAST_NOTI;
