@@ -40,6 +40,16 @@ public class HeroController : MonoBehaviour
         InitManaBar();
     }
 
+    void OnEnable()
+    {
+        EventManager.StartListeningEvent(EventName.Hero.SET_POSITION, SetPosition);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListeningEvent(EventName.Hero.SET_POSITION, SetPosition);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
@@ -86,5 +96,12 @@ public class HeroController : MonoBehaviour
     public float GetCurrentMana()
     {
         return currentMana;
+    }
+
+    private void SetPosition(object data)
+    {
+        gameObject.transform.position = (Vector3)data;
+
+        EventManager.EmitEvent(EventName.Camera.SETUP);
     }
 }

@@ -5,4 +5,8 @@ public class PathResource
     #region toast
     public const string PATH_PREFAB_TOAST_NOTI = "ComponentSystem/ToastNoti";
     #endregion
+
+    #region map
+    public const string PATH_PREFAB_MAP = "Map";
+    #endregion
 }

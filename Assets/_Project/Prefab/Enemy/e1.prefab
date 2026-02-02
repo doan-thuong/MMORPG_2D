@@ -485,7 +485,7 @@ PrefabInstance:
       addedObject: {fileID: 1110031651943199481}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4342586128850740068}
+      addedObject: {fileID: 6358070199672217138}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1544dcfa642130a45be38de38cc68fae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3712316507199546562}
@@ -578,7 +578,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6, y: 13.5}
   m_EdgeRadius: 0
---- !u!50 &4342586128850740068
+--- !u!50 &6358070199672217138
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -603,8 +603,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &3712316507199546562
 MonoBehaviour:
   m_ObjectHideFlags: 0

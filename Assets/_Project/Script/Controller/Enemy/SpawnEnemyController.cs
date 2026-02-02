@@ -4,7 +4,6 @@ using UnityEngine;
 public class SpawnEnemyController : MonoBehaviour
 {
     [SerializeField] private EnemySpawnConfig spawnConfig;
-    private int timeDelaySpawn = 5;
 
     void Start()
     {
@@ -19,11 +18,18 @@ public class SpawnEnemyController : MonoBehaviour
     void OnEnable()
     {
         EventManager.StartListeningEvent(EventName.Enemy.ENEMY_DIE, OnEnemyDied);
+        EventManager.StartListeningEvent(EventName.Enemy.ENEMY_SPAWN, CallSpawnEnemy);
     }
 
     void OnDisable()
     {
         EventManager.StopListeningEvent(EventName.Enemy.ENEMY_DIE, OnEnemyDied);
+        EventManager.StopListeningEvent(EventName.Enemy.ENEMY_SPAWN, CallSpawnEnemy);
+    }
+
+    void CallSpawnEnemy()
+    {
+        SpawnEnemy();
     }
 
     void SpawnEnemy()
@@ -56,7 +62,7 @@ public class SpawnEnemyController : MonoBehaviour
     IEnumerator RespawnAfterDelay(EnemyController enemy)
     {
         enemy.SetDataHpBar(enemy.GetMaxHp());
-        yield return new WaitForSeconds(timeDelaySpawn);
+        yield return new WaitForSeconds(enemy.GetTimeSpawn());
 
         enemy.transform.position = enemy.OriginalSpawnPoint;
         enemy.gameObject.SetActive(true);

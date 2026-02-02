@@ -12,6 +12,7 @@ public class EnemyRecord
     public float rangeAttack;
     public float attackCooldown;
     public float projectileSpeed;
+    public float timeDelaySpawn;
 }
 
 [CreateAssetMenu(fileName = "enemy_config", menuName = "Custom/enemy_config")]
