@@ -20,6 +20,7 @@ public abstract class SingletonBehaviour<T> : SingletonBehaviour where T : MonoB
 
     private void Awake()
     {
+        _instance = this as T;
         DontDestroyOnLoad(this.gameObject);
         OnAwake();
     }
