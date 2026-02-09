@@ -70,6 +70,11 @@ public class EnemyController : MonoBehaviour
         return enemyRecord;
     }
 
+    public float GetTimeSpawn()
+    {
+        return enemyRecord.timeDelaySpawn;
+    }
+
     public void Die()
     {
         gameObject.SetActive(false);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: enemy_spawn_config
   m_EditorClassIdentifier: 
   enemySpawns:
-  - spawnPoint: {x: -1, y: -3, z: 1}
+  - spawnPoint: {x: 5, y: 2, z: 1}
     prefab: {fileID: 8608260708824028991, guid: 0bd9a830b4d95314d8c1e61672ae8673, type: 3}
-  - spawnPoint: {x: -11, y: -3, z: 1}
+  - spawnPoint: {x: 12, y: 1.35, z: 1}
     prefab: {fileID: 4730038775631838318, guid: 6d9a3e31899a9e7499b396075cf806bc, type: 3}

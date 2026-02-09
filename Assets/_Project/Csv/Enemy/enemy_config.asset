@@ -19,9 +19,11 @@ MonoBehaviour:
     rangeAttack: 5
     attackCooldown: 3
     projectileSpeed: 8
+    timeDelaySpawn: 5
   - id: e2
     damage: 15
     hp: 30
     rangeAttack: 6
     attackCooldown: 3
     projectileSpeed: 8
+    timeDelaySpawn: 5

@@ -1,3 +1,3 @@
-id,damage,hp,rangeAttack,attackCooldown,projectileSpeed
-e1,10,50,5,3,8
-e2,15,30,6,3,8
+id,damage,hp,rangeAttack,attackCooldown,projectileSpeed,timeDelaySpawn
+e1,10,50,5,3,8,5
+e2,15,30,6,3,8,5

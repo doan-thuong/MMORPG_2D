@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
@@ -7,7 +6,7 @@ public class MoveController : MonoBehaviour
     private Vector3 startPosition;
     private Vector2 leftPoint;
     private Vector2 rightPoint;
-    [SerializeField] private float maxDistance = 5f;
+    [SerializeField] private float maxDistance = 3f;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float waitTime = 3f;
     private EnemyAnimatorService animator;
