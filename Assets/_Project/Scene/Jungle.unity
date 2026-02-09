@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3167904341210179608, guid: f9f3b626bb8c0684787be326b0d99704, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3720862890459271873, guid: f9f3b626bb8c0684787be326b0d99704, type: 3}
       propertyPath: btnAttack
       value: 
@@ -354,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1479521170}
-  myObject: {fileID: 0}
+  isSetting: 0
 --- !u!81 &620552398
 AudioListener:
   m_ObjectHideFlags: 0
@@ -712,7 +716,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapId: 10002
   mapPrefabPath: 
-  mapRoot: {fileID: 0}
 --- !u!114 &1606182165
 MonoBehaviour:
   m_ObjectHideFlags: 0

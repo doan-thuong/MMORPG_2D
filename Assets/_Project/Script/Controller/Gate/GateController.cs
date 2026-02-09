@@ -3,18 +3,31 @@ using UnityEngine;
 public class GateController : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private SceneReference targetScene;
+    [SerializeField] private GateRecord gateRecord;
+    [SerializeField] private string mapId;
+    [SerializeField] private string nextGateId;
+    [SerializeField] private GateConfig gateConfig;
+
+    void Awake()
+    {
+        GateService.gateConfig = gateConfig;
+    }
+    void Start()
+    {
+        mapId = MapInit.Instance.MapId;
+        gateRecord = GateService.GetGateRecord(mapId, nextGateId);
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (targetScene == null)
+        if (mapId == null)
         {
-            Debug.LogError("Scene null");
+            Debug.LogError("Map id null");
             return;
         }
         if (GameUtil.IsInLayer(collision.gameObject, layerMask))
         {
-            SceneService.LoadScene(targetScene);
+            MapInit.Instance.LoadNewMap(gateRecord.nextGateId, gateRecord.playerSpawnPoint);
         }
     }
 }

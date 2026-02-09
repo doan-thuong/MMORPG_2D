@@ -3,38 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+public class SerializableDictionary<K, V> : Dictionary<K, V>, ISerializationCallbackReceiver
 {
-    [SerializeField] private List<KeyValuePairWrapper> dictionary = new();
+    [SerializeField] private List<K> keys = new List<K>();
+    [SerializeField] private List<V> values = new List<V>();
 
-    // Khi Unity serialize (trước khi save)
+    // Lưu trữ dữ liệu từ Dictionary vào List để Unity có thể lưu file/hiển thị
     public void OnBeforeSerialize()
     {
-        dictionary.Clear();
-        foreach (var kvp in this)
+        // Chỉ cập nhật List khi Dictionary có dữ liệu (tránh ghi đè khi đang load)
+        // Hoặc khi số lượng thay đổi do code tác động
+        keys.Clear();
+        values.Clear();
+
+        foreach (var pair in this)
         {
-            dictionary.Add(new KeyValuePairWrapper { key = kvp.Key, value = kvp.Value });
+            keys.Add(pair.Key);
+            values.Add(pair.Value);
         }
     }
 
-    // Khi Unity deserialize (khi load hoặc mở Inspector)
+    // Đổ dữ liệu từ List vào Dictionary để dùng trong code
     public void OnAfterDeserialize()
     {
-        Clear();
-        foreach (var pair in dictionary)
+        this.Clear();
+
+        if (keys.Count != values.Count)
         {
-            if (pair.key != null && !ContainsKey(pair.key))
+            Debug.LogError("Trọng yếu: Số lượng Key và Value không khớp!");
+            return;
+        }
+
+        for (int i = 0; i < keys.Count; i++)
+        {
+            // QUAN TRỌNG: Nếu trùng Key trên Inspector, Unity sẽ không crash 
+            // mà chỉ bỏ qua hoặc ghi đè, giúp bạn có cơ hội sửa lại Key đó.
+            if (keys[i] != null)
             {
-                Add(pair.key, pair.value);
+                this[keys[i]] = values[i];
             }
         }
-    }
-
-    // Wrapper cho từng cặp key-value (để Inspector hiển thị)
-    [Serializable]
-    private class KeyValuePairWrapper
-    {
-        public TKey key;
-        public TValue value;
     }
 }

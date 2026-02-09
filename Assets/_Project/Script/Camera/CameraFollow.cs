@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : SingletonBehaviour<CameraFollow>
 {
     public Transform target;
-    [SerializeField] private GameObject myObject;
+    // [SerializeField] private GameObject myObject;
     private new EdgeCollider2D collider;
     private Dictionary<string, Vector2> pointLimit;
     private Dictionary<string, Vector2> pointCurrent;
@@ -12,10 +12,21 @@ public class CameraFollow : MonoBehaviour
     private Vector2 limitPosMax;
     private Vector2 currentLeft;
     private Vector2 currentRight;
+    public bool isSetting;
 
-    void Start()
+    void OnEnable()
     {
-        collider = myObject.GetComponent<EdgeCollider2D>();
+        EventManager.StartListeningEvent(EventName.Camera.SETUP, InitCamera);
+    }
+
+    void OnDisable()
+    {
+        EventManager.StopListeningEvent(EventName.Camera.SETUP, InitCamera);
+    }
+
+    void InitCamera()
+    {
+        collider = MapInit.Instance.GetMoveable();
         if (collider == null)
         {
             Debug.LogError("Collider in walkable null");
@@ -28,11 +39,14 @@ public class CameraFollow : MonoBehaviour
         pointLimit = FindPointLimit();
         limitPosMin = pointLimit["minX"];
         limitPosMax = pointLimit["maxX"];
+
+        isSetting = true;
     }
 
     public void LateUpdate()
     {
         if (target == null) return;
+        if (!isSetting) return;
 
         Vector3 targetPos = target.position;
 

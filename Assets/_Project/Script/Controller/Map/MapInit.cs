@@ -97,6 +97,7 @@ public class MapInit : SingletonBehaviour<MapInit>
     public void LoadNewMap(string mapId, Vector3 pointSpawn)
     {
         this.mapId = mapId;
+        Debug.Log($"public: {this.mapId} local: {mapId}");
         mapPrefabPath = $"{PathResource.PATH_PREFAB_MAP}/{mapId}";
 
         UnloadCurrentMap();
